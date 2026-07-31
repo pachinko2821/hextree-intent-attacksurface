@@ -29,7 +29,8 @@
             android:theme="@style/Theme.IntentAttackSurface"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                 <action android:name="io.hextree.attacksurface.ATTACK_ME" />
+                <action android:name="io.hextree.attacksurface.ATTACK_ME" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -61,6 +62,17 @@
             android:label="@string/title_activity_flag22"
             android:theme="@style/Theme.IntentAttackSurface"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Flag23Activity"
+            android:exported="true"
+            android:label="@string/title_activity_flag23"
+            android:theme="@style/Theme.IntentAttackSurface"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="io.hextree.attacksurface.MUTATE_ME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
