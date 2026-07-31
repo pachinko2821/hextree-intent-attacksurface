@@ -1,8 +1,7 @@
 package com.pachinko.intentattacksurface
 
-import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -13,20 +12,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.pachinko.intentattacksurface.utils.ui.theme.IntentAttackSurfaceTheme
+import com.pachinko.intentattacksurface.ui.theme.IntentAttackSurfaceTheme
+import com.pachinko.intentattacksurface.utils.Utils
 
-class Flag12Activity : ComponentActivity() {
+class Flag22Activity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val intent = Intent().apply {
-            component = ComponentName(
-                "io.hextree.attacksurface",
-                "io.hextree.attacksurface.activities.Flag12Activity"
-            )
-            putExtra("token", 1094795585)
-        }
-        setResult(RESULT_OK, intent)
-        finish()
+        Utils.showDialog(this, intent)
+        Toast.makeText(this, intent.getStringExtra("flag"), Toast.LENGTH_SHORT).show()
     }
 }
