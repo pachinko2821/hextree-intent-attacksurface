@@ -42,6 +42,7 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter android:priority="99">
                 <action android:name="io.hextree.attacksurface.ATTACK_ME" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -53,6 +54,7 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="io.hextree.attacksurface.ATTACK_ME" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -71,6 +73,21 @@
             <intent-filter>
                 <action android:name="io.hextree.attacksurface.MUTATE_ME" />
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Flag14Activity"
+            android:exported="true"
+            android:label="@string/title_activity_flag14"
+            android:theme="@style/Theme.IntentAttackSurface"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"
+                    android:host="ht-api-mocks-lcfc4kr5oa-uc.a.run.app"
+                    android:pathPrefix="/android-app-auth" />
             </intent-filter>
         </activity>
     </application>
