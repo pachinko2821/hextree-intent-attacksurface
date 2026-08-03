@@ -33,6 +33,11 @@ class MainHextreeActivity : ComponentActivity() {
             Utils.showDialog(this, result.data ?: Intent())
         }
 
+        val flag9Launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            Log.d("Flag9 Receiver", "Result code: ${result.resultCode}")
+            Utils.showDialog(this, result.data ?: Intent())
+        }
+
         setContent {
             IntentFireButton { flagNumber ->
                 when (flagNumber) {
@@ -44,7 +49,7 @@ class MainHextreeActivity : ComponentActivity() {
                     6 -> Flag6.getFlag(this)
                     7 -> Flag7.getFlag(this)
                     8 -> Flag8.getFlag(this, flag8Launcher)
-                    9 -> Flag9.getFlag(this)
+                    9 -> Flag9.getFlag(this, flag9Launcher)
                     10 -> Flag10.getFlag(this)
                     11 -> Flag11.getFlag(this)
                     12 -> Flag12.getFlag(this)
