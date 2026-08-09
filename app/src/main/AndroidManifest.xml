@@ -102,6 +102,12 @@
             android:label="@string/title_activity_flag27"
             android:theme="@style/Theme.IntentAttackSurface"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Flag28Activity"
+            android:exported="false"
+            android:label="@string/title_activity_flag29"
+            android:theme="@style/Theme.IntentAttackSurface"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
