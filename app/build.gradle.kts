@@ -36,6 +36,12 @@ android {
         compose = true
         aidl = true
     }
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
 }
 
 dependencies {
