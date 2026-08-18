@@ -14,7 +14,7 @@ object Flag41 {
                 "io.hextree.attacksurface",
                 "io.hextree.attacksurface.activities.Flag41Activity"
             )
-            putExtra("URL", "https://hextree.free.beeceptor.com/flag41")
+            putExtra("URL", "https://iampachinko.site/f41.html")
         }
         context.startActivity(intent)
     }

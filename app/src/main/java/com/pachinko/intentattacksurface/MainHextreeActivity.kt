@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.pachinko.intentattacksurface.ui.theme.IntentAttackSurfaceTheme
 import com.pachinko.intentattacksurface.utils.*
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 class MainHextreeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +66,47 @@ class MainHextreeActivity : ComponentActivity() {
                 cursor?.close()
             } catch (e: Error) {
                 Log.e("Flag33Err", e.message.toString())
+            }
+        }
+
+        val flag34Launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            try {
+                val uri = result.data?.data!!
+                contentResolver.openInputStream(uri)?.use { inputStream ->
+                    BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                        Log.d("Flag34", reader.readText())
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("File34", e.message.toString())
+            }
+        }
+
+        val flag35Launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            try {
+                val uri = result.data?.data!!
+                contentResolver.openInputStream(uri)?.use { inputStream ->
+                    BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                        Log.d("Flag35", reader.readText())
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("File35", e.message.toString())
+            }
+        }
+
+        val flag36Launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            try {
+                val uri = result.data?.data!!
+                val content = """<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <boolean name="solved" value="true" />
+</map>"""
+                contentResolver.openOutputStream(uri)?.use{ outputStream ->
+                    outputStream.write(content.toByteArray())
+                }
+            } catch (e: Exception) {
+                Log.e("File35", e.message.toString())
             }
         }
 
@@ -125,9 +168,9 @@ class MainHextreeActivity : ComponentActivity() {
                     31 -> Flag31.getFlag(this)
                     32 -> Flag32.getFlag(this)
                     33 -> Flag33.getFlag(this, flag33Launcher)
-                    34 -> Flag34.getFlag(this)
-                    35 -> Flag35.getFlag(this)
-                    36 -> Flag36.getFlag(this)
+                    34 -> Flag34.getFlag(this, flag34Launcher)
+                    35 -> Flag35.getFlag(this, flag35Launcher)
+                    36 -> Flag36.getFlag(this, flag36Launcher)
                     37 -> Flag37.getFlag(this)
                     38 -> Flag38.getFlag(this)
                     39 -> Flag39.getFlag(this)
